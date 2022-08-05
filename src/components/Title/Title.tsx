@@ -1,15 +1,30 @@
-import React from 'react';
 import cn from 'classnames';
 
 import { TitleProps } from './Title.props';
 import styles from './Title.module.scss';
 
-//todo 1) Сверстать поле для игры
+export const Title = ({ tag, children, className, ...props }: TitleProps): JSX.Element => {
+  switch (tag) {
+    case 'h1':
+      return (
+        <h1 className={cn(className, styles.h1)} {...props}>
+          {children}
+        </h1>
+      );
+    case 'h2':
+      return (
+        <h2 className={cn(className, styles.h2)} {...props}>
+          {children}
+        </h2>
+      );
+    case 'h3':
+      return (
+        <h3 className={cn(className, styles.h3)} {...props}>
+          {children}
+        </h3>
+      );
 
-export const Title = ({ className, children }: TitleProps) => {
-  return (
-    <button className={cn(className, styles.button)} type="button">
-      {children}
-    </button>
-  );
+    default:
+      return <></>;
+  }
 };

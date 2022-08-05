@@ -1,15 +1,14 @@
-.button {
-  padding: 15px 40px;
-  background-color: var(--accent);
-  box-shadow: 0 4px 4px 0 var(--box-shadow);
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+.h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
 
-  &:focus-visible {
-    outline-color: var(--orange);
-  }
+.h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
 
-  &:hover {
-    background-color: var(--accent-hover);
-  }
+.h3 {
+  font-size: 24px;
+  font-weight: 500;
 }
