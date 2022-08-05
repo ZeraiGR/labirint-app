@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './styles/App.module.scss';
-import { Button, Info, Title, P } from './components';
+import { Button, Info, Title, P, Field, StepList } from './components';
 
 //todo 1) Сверстать поле для игры
 
@@ -19,7 +19,8 @@ function App() {
           отследить движение медвежонка и указать, в какой клетке он в итоге оказался.
         </P>
       </Info>
-
+      <Field />
+      <StepList />
       <Button>Начать игру</Button>
     </div>
   );

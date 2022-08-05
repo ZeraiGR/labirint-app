@@ -1,0 +1,48 @@
+.cell {
+  padding: 10px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(--pink-light);
+
+  &.active {
+    cursor: pointer;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bear {
+  display: none;
+  width: 50px;
+  fill: var(--black);
+
+  &.active {
+    display: block;
+  }
+}
+
+.like {
+  display: none;
+  width: 50px;
+
+  &.correct {
+    display: block;
+    fill: var(--accent);
+  }
+
+  &.incorrect {
+    display: block;
+    fill: var(--red);
+    transform: rotate(180deg);
+  }
+
+  &.hide {
+    display: none;
+  }
+}

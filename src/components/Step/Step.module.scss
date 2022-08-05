@@ -1,0 +1,33 @@
+.step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: var(--orange);
+
+  &.active {
+    background-color: var(--accent);
+  }
+}
+
+.arrow {
+  width: 70%;
+  stroke: var(--black);
+
+  &.bottom {
+    transform: rotate(0);
+  }
+
+  &.left {
+    transform: rotate(90deg);
+  }
+
+  &.top {
+    transform: rotate(180deg);
+  }
+
+  &.right {
+    transform: rotate(270deg);
+  }
+}
