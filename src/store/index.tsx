@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import gameReducer from './game/gameSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    game: gameReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

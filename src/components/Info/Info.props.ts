@@ -2,5 +2,7 @@ import { DetailedHTMLProps, ReactNode, HTMLAttributes } from 'react';
 
 export interface InfoProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  children: ReactNode;
+  title: string;
+  description: string;
+  children?: ReactNode;
 }

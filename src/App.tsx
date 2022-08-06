@@ -1,27 +1,47 @@
-import React from 'react';
+import cn from 'classnames';
 
 import styles from './styles/App.module.scss';
-import { Button, Info, Title, P, Field, StepList } from './components';
-
-//todo 1) Сверстать поле для игры
+import { Button, Info, Title, Field, StepList } from './components';
+import { useAppDispatch, useAppSelector } from './hooks/hooks';
+import { initGame, setStartPosition } from './store/game/gameSlice';
+import { getRandomNumber } from './utils/randomizer';
+import { selectGameProps } from './store/game/gameSelectors';
+import { generateStartPosition } from './utils/generateStartPosition';
 
 function App() {
+  const { isGameInit, gameName, gameTitle, gameDecription, timeForStep } =
+    useAppSelector(selectGameProps);
+  const dispatch = useAppDispatch();
+
+  const startGame = () => {
+    dispatch(initGame());
+
+    // start position
+    const startPosition = generateStartPosition();
+    dispatch(setStartPosition(startPosition));
+
+    setTimeout(() => {}, timeForStep);
+  };
+
   return (
-    <div className={styles.wrapper}>
-      <Title tag="h1">Игра - лабиринт</Title>
-      <Info className={styles.info}>
-        <Title className={styles.title} tag="h2">
-          Как играть?
-        </Title>
-        <P>
-          Как только начнётся игра, ты увидишь поле 3х3 и начальную точку, в которой находится
-          медвежонок. Ниже будет генерироваться путь медвежонка по стрелочкам. Твоя задача -
-          отследить движение медвежонка и указать, в какой клетке он в итоге оказался.
-        </P>
-      </Info>
-      <Field />
-      <StepList />
-      <Button>Начать игру</Button>
+    <div className={cn(styles.wrapper, { [styles.start]: isGameInit })}>
+      <Title className={styles.title} tag="h1">
+        {gameName || 'Введите название игры'}
+      </Title>
+
+      {!isGameInit && (
+        <>
+          <Info className={styles.info} title={gameTitle} description={gameDecription} />
+          <Button onClick={startGame}>Начать игру</Button>
+        </>
+      )}
+
+      {isGameInit && (
+        <>
+          <Field />
+          <StepList />
+        </>
+      )}
     </div>
   );
 }
