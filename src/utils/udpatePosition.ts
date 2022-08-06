@@ -1,35 +1,35 @@
 import { getNeighbours } from './getNeighbour';
 import { X_RANGE, Y_RANGE } from './gamePositions';
-import { Cell } from '../store/game/gameSlice';
 import { getRandomNumber } from './randomizer';
+import { ICell, Direction } from '../interfaces/core.interfaces';
 
-export const updatePosition = (currentPosition: Cell): [Cell, string] => {
-  const xAvailableRange = getNeighbours(currentPosition.x, X_RANGE),
-    yAvailableRange = getNeighbours(currentPosition.y, Y_RANGE),
+export const updatePosition = (currentCell: ICell): [ICell, Direction] => {
+  const xAvailableRange = getNeighbours(currentCell.x, X_RANGE),
+    yAvailableRange = getNeighbours(currentCell.y, Y_RANGE),
     direction = getRandomNumber(0, 1);
 
-  let updatedPosition = currentPosition,
-    route = 'none';
+  let updatedPosition = currentCell,
+    route = Direction.None;
 
-  const assignNewPosition = (range: string[], dir: 'x' | 'y'): [Cell, string] => {
+  const assignNewPosition = (range: string[], dir: 'x' | 'y'): [ICell, Direction] => {
     const updValue = range.length > 1 ? range[getRandomNumber(0, 1)] : range[0];
-    let dirName = '';
+    let dirName = Direction.None;
     let pos = null;
 
     if (dir === 'x') {
-      dirName = updValue > currentPosition.x ? 'right' : 'left';
+      dirName = updValue > currentCell.x ? Direction.Right : Direction.Left;
 
       pos = {
         x: updValue,
-        y: currentPosition.y,
-      } as Cell;
+        y: currentCell.y,
+      } as ICell;
     } else {
-      dirName = updValue > currentPosition.y ? 'bottom' : 'top';
+      dirName = updValue > currentCell.y ? Direction.Down : Direction.Up;
 
       pos = {
-        x: currentPosition.x,
+        x: currentCell.x,
         y: updValue,
-      } as Cell;
+      } as ICell;
     }
 
     return [pos, dirName];

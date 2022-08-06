@@ -1,70 +1,65 @@
-import cn from 'classnames';
-
-import styles from './styles/App.module.scss';
-import { Button, Info, Title, Field, StepList } from './components';
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
-import { initGame, setStartPosition, setCurrentPosition, Cell } from './store/game/gameSlice';
-import { selectGameProps } from './store/game/gameSelectors';
-import { generateStartPosition } from './utils/generateStartPosition';
+import {
+  initGame,
+  finishGame,
+  setstartCell,
+  setcurrentCell,
+  setfinishCell,
+  changeAbleToClick,
+  setCurrentDirection,
+} from './store/core/coreSlice';
+import { selectSettingsProps } from './store/settings/settingsSelectors';
+import { generatestartCell } from './utils/generateStartPosition';
 import { updatePosition } from './utils/udpatePosition';
+import { ICell } from './interfaces/core.interfaces';
+import { Game } from './pages';
 
 function App() {
-  const { isGameInit, gameName, gameTitle, gameDecription, timeForStep } =
-    useAppSelector(selectGameProps);
   const dispatch = useAppDispatch();
+  const { timeForStep, stepQuantity } = useAppSelector(selectSettingsProps);
 
-  const startGameLoop = (startPosition: Cell) => {
-    let currentPosition = startPosition;
+  // core game logic
+  const startGameLoop = (startCell: ICell) => {
+    let currentCell = startCell;
     let counter = 0;
 
     let id = setInterval(() => {
       counter++;
 
-      const [updatedPosition, route] = updatePosition(currentPosition);
-      currentPosition = updatedPosition;
-      dispatch(setCurrentPosition(currentPosition));
-      console.log(currentPosition, route);
+      const [updatedPosition, route] = updatePosition(currentCell);
+      currentCell = updatedPosition;
+      dispatch(setcurrentCell(currentCell));
+      dispatch(setCurrentDirection(route));
 
-      if (counter === 10) {
+      if (counter === stepQuantity) {
         clearInterval(id);
+        dispatch(setfinishCell(currentCell));
+        dispatch(changeAbleToClick());
       }
     }, timeForStep);
   };
 
   const startGame = () => {
-    dispatch(initGame());
-
     // set start position
-    const startPosition = generateStartPosition();
-    dispatch(setStartPosition(startPosition));
+    const startCell = generatestartCell();
+    dispatch(setstartCell(startCell));
 
     // start game loop
     setTimeout(() => {
-      startGameLoop(startPosition);
+      startGameLoop(startCell);
     }, timeForStep);
   };
 
-  return (
-    <div className={cn(styles.wrapper, { [styles.start]: isGameInit })}>
-      <Title className={styles.title} tag="h1">
-        {gameName || 'Введите название игры'}
-      </Title>
+  const init = () => {
+    dispatch(initGame());
+    startGame();
+  };
 
-      {!isGameInit && (
-        <>
-          <Info className={styles.info} title={gameTitle} description={gameDecription} />
-          <Button onClick={startGame}>Начать игру</Button>
-        </>
-      )}
+  const finish = () => {
+    dispatch(finishGame());
+  };
 
-      {isGameInit && (
-        <>
-          <Field />
-          <StepList />
-        </>
-      )}
-    </div>
-  );
+  return <Game init={init} startGame={startGame} finish={finish} />;
 }
 
 export default App;

@@ -1,4 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface StepListProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {}
+  extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
+  quantity: number;
+}

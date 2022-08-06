@@ -1,4 +1,4 @@
-export const GAME_NAME = 'Лабиринт';
+export const GAME_NAME = 'Медо-лабиринт';
 
 export const GAME_TITLE = 'Как играть?';
 
