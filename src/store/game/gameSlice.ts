@@ -4,8 +4,8 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { GAME_DESCRIPTION, GAME_NAME, GAME_TITLE } from './gameConstants';
 
 export interface Cell {
-  x: '1' | '2' | '3';
-  y: 'A' | 'B' | 'C';
+  x: 'A' | 'B' | 'C';
+  y: '1' | '2' | '3';
 }
 
 export interface gameState {
@@ -23,8 +23,8 @@ const initialState: gameState = {
   isGameInit: false,
   isAbleToClick: false,
   timeForStep: 500,
-  startPosition: { x: '1', y: 'A' },
-  currentPosition: { x: '1', y: 'A' },
+  startPosition: { x: 'A', y: '1' },
+  currentPosition: { x: 'A', y: '1' },
   gameName: GAME_NAME,
   gameTitle: GAME_TITLE,
   gameDecription: GAME_DESCRIPTION,
@@ -34,7 +34,8 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    doStep: (state, action: PayloadAction<Cell>) => {
+    // core logic
+    setCurrentPosition: (state, action: PayloadAction<Cell>) => {
       state.currentPosition = action.payload;
     },
     initGame: (state) => {
@@ -46,12 +47,14 @@ export const gameSlice = createSlice({
     changeAbleToClick: (state) => {
       state.isAbleToClick = !state.isAbleToClick;
     },
+    // settings
     changeTimeForStep: (state, action: PayloadAction<number>) => {
       state.timeForStep = action.payload;
     },
   },
 });
 
-export const { doStep, initGame, setStartPosition, changeAbleToClick } = gameSlice.actions;
+export const { initGame, setStartPosition, setCurrentPosition, changeAbleToClick } =
+  gameSlice.actions;
 
 export default gameSlice.reducer;
