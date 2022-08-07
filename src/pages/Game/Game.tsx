@@ -7,6 +7,7 @@ import { GameProps } from './Game.props';
 import styles from './Game.module.scss';
 import { selectCoreProps } from '../../store/core/coreSelectors';
 import { selectSettingsProps } from '../../store/settings/settingsSelectors';
+import { Link } from 'react-router-dom';
 
 const variants = {
   hide: { opacity: 0, y: '200%' },
@@ -28,7 +29,12 @@ export const Game = ({ init, finish, restart }: GameProps) => {
       {!isGameInit && (
         <>
           <Info className={styles.info} title={gameTitle} description={gameDecription} />
-          <Button onClick={init}>Начать игру</Button>
+          <Button className={styles.btnstart} onClick={init}>
+            Начать игру
+          </Button>
+          <Link className={styles.link} to="/settings">
+            Настройки
+          </Link>
         </>
       )}
 

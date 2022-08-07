@@ -1,4 +1,5 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import {
@@ -15,7 +16,7 @@ import { selectSettingsProps } from './store/settings/settingsSelectors';
 import { generatestartCell } from './utils/generateStartPosition';
 import { updatePosition } from './utils/udpatePosition';
 import { ICell } from './interfaces/core.interfaces';
-import { Game } from './pages';
+import { Game, Settings } from './pages';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -78,7 +79,12 @@ function App() {
     init();
   };
 
-  return <Game init={init} restart={restart} finish={finish} />;
+  return (
+    <Routes>
+      <Route path="/" element={<Game init={init} restart={restart} finish={finish} />} />
+      <Route path="settings" element={<Settings />} />
+    </Routes>
+  );
 }
 
 export default App;

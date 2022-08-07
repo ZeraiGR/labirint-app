@@ -1,0 +1,12 @@
+.input {
+  padding: 15px 25px;
+  border-radius: 4px;
+  box-shadow: 0 4px 4px 0 var(--box-shadow);
+  resize: vertical;
+  transition: outline 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    outline-color: var(--accent);
+    box-shadow: none;
+  }
+}
