@@ -3,6 +3,11 @@ export interface ICell {
   y: '1' | '2' | '3';
 }
 
+export interface IStep {
+  id: number;
+  direction: Direction;
+}
+
 export enum Direction {
   Up = 'up',
   Down = 'down',
@@ -19,4 +24,5 @@ export interface coreState {
   finishCell: ICell;
   choosenCell: ICell | null;
   currentDirection: Direction;
+  currentStep: number;
 }

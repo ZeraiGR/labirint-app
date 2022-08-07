@@ -10,6 +10,7 @@ import { changeAbleToClick, setChoosenCell } from '../../store/core/coreSlice';
 import styles from './Cell.module.scss';
 import { ReactComponent as BearIcon } from './icon-bear.svg';
 import { ReactComponent as LikeIcon } from './icon-like.svg';
+import { selectSettingsProps } from '../../store/settings/settingsSelectors';
 
 export const Cell = ({
   x,
@@ -18,11 +19,13 @@ export const Cell = ({
   isChoosen,
   isCorrected,
   hasChoosen,
+  startGame,
   className,
   ...props
 }: CellProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { isAbleToClick } = useAppSelector(selectCoreProps);
+  const { timeBetweenRound } = useAppSelector(selectSettingsProps);
 
   const chooseCell = () => {
     if (!isAbleToClick) {
@@ -32,6 +35,11 @@ export const Cell = ({
 
     dispatch(setChoosenCell(currentCell));
     dispatch(changeAbleToClick());
+
+    // new party
+    setTimeout(() => {
+      startGame();
+    }, timeBetweenRound);
   };
 
   return (

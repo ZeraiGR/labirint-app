@@ -12,6 +12,7 @@ const initialState: coreState = {
   finishCell: initCell,
   choosenCell: null,
   currentDirection: Direction.None,
+  currentStep: 0,
 };
 
 export const coreSlice = createSlice({
@@ -35,6 +36,7 @@ export const coreSlice = createSlice({
     },
     setCurrentDirection: (state, action: PayloadAction<Direction>) => {
       state.currentDirection = action.payload;
+      state.currentStep = state.currentStep + 1;
     },
     changeAbleToClick: (state) => {
       state.isAbleToClick = !state.isAbleToClick;

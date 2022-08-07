@@ -5,7 +5,7 @@ import { GAME_DESCRIPTION, GAME_NAME, GAME_TITLE } from './coreConstants';
 
 export interface settingsState {
   timeForStep: number;
-  stepQuantity: number;
+  timeBetweenRound: number;
   gameName: string;
   gameTitle: string;
   gameDecription: string;
@@ -13,7 +13,7 @@ export interface settingsState {
 
 const initialState: settingsState = {
   timeForStep: 500,
-  stepQuantity: 10,
+  timeBetweenRound: 1000,
   gameName: GAME_NAME,
   gameTitle: GAME_TITLE,
   gameDecription: GAME_DESCRIPTION,
@@ -25,6 +25,9 @@ export const settingsSlice = createSlice({
   reducers: {
     changeTimeForStep: (state, action: PayloadAction<number>) => {
       state.timeForStep = action.payload;
+    },
+    changeTimeBetWeenRound: (state, action: PayloadAction<number>) => {
+      state.timeBetweenRound = action.payload;
     },
   },
 });

@@ -7,7 +7,13 @@ import { Cell } from '../Cell/Cell';
 import { useAppSelector } from '../../hooks/hooks';
 import { selectCoreProps } from '../../store/core/coreSelectors';
 
-export const Field = ({ startCell, finishCell, className, ...props }: FieldProps): JSX.Element => {
+export const Field = ({
+  startCell,
+  finishCell,
+  startGame,
+  className,
+  ...props
+}: FieldProps): JSX.Element => {
   const { choosenCell } = useAppSelector(selectCoreProps);
 
   return (
@@ -21,6 +27,7 @@ export const Field = ({ startCell, finishCell, className, ...props }: FieldProps
           isChoosen={choosenCell && choosenCell.x === c.x && choosenCell.y === c.y}
           hasChoosen={choosenCell !== null}
           isCorrected={finishCell.x === c.x && finishCell.y === c.y}
+          startGame={startGame}
         />
       ))}
     </ul>

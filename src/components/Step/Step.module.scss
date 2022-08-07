@@ -15,6 +15,10 @@
   width: 70%;
   stroke: var(--black);
 
+  &.none {
+    display: none;
+  }
+
   &.bottom {
     transform: rotate(0);
   }

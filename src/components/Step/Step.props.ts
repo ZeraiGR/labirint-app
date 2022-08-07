@@ -1,6 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { Direction } from '../../interfaces/core.interfaces';
 
 export interface StepProps extends DetailedHTMLProps<HTMLAttributes<HTMLLIElement>, HTMLLIElement> {
-  direction: 'top' | 'bottom' | 'left' | 'right' | 'none';
+  direction: Direction;
   isCurrent: boolean;
 }

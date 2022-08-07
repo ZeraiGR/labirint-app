@@ -5,4 +5,5 @@ export interface FieldProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
   startCell: ICell;
   finishCell: ICell;
+  startGame: () => void;
 }

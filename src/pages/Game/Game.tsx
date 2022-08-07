@@ -8,8 +8,9 @@ import { selectCoreProps } from '../../store/core/coreSelectors';
 import { selectSettingsProps } from '../../store/settings/settingsSelectors';
 
 export const Game = ({ init, finish, startGame }: GameProps) => {
-  const { isGameInit, startCell, finishCell, choosenCell } = useAppSelector(selectCoreProps);
-  const { gameName, gameTitle, gameDecription, stepQuantity } = useAppSelector(selectSettingsProps);
+  const { isGameInit, startCell, currentDirection, finishCell, choosenCell } =
+    useAppSelector(selectCoreProps);
+  const { gameName, gameTitle, gameDecription } = useAppSelector(selectSettingsProps);
 
   return (
     <div className={cn(styles.wrapper, { [styles.start]: isGameInit })}>
@@ -26,8 +27,8 @@ export const Game = ({ init, finish, startGame }: GameProps) => {
 
       {isGameInit && (
         <>
-          <Field startCell={startCell} finishCell={finishCell} />
-          <StepList className={styles.stepList} quantity={stepQuantity} />
+          <Field startCell={startCell} finishCell={finishCell} startGame={startGame} />
+          <StepList className={styles.stepList} />
           <Button onClick={finish}>Завершить игру</Button>
         </>
       )}

@@ -16,7 +16,7 @@ import { Game } from './pages';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { timeForStep, stepQuantity } = useAppSelector(selectSettingsProps);
+  const { timeForStep } = useAppSelector(selectSettingsProps);
 
   // core game logic
   const startGameLoop = (startCell: ICell) => {
@@ -29,9 +29,10 @@ function App() {
       const [updatedPosition, route] = updatePosition(currentCell);
       currentCell = updatedPosition;
       dispatch(setcurrentCell(currentCell));
+
       dispatch(setCurrentDirection(route));
 
-      if (counter === stepQuantity) {
+      if (counter === 10) {
         clearInterval(id);
         dispatch(setfinishCell(currentCell));
         dispatch(changeAbleToClick());

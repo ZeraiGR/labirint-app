@@ -5,6 +5,7 @@ export interface CellProps extends DetailedHTMLProps<HTMLAttributes<HTMLLIElemen
   isChoosen: boolean | null;
   isCorrected: boolean;
   hasChoosen: boolean;
+  startGame: () => void;
   x: string;
   y: string;
 }
