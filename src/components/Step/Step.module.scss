@@ -5,6 +5,7 @@
   width: 50px;
   height: 50px;
   background-color: var(--orange);
+  transition: background-color var(--steptime) ease;
 
   &.active {
     background-color: var(--accent);
@@ -14,9 +15,10 @@
 .arrow {
   width: 70%;
   stroke: var(--black);
+  transition: opacity var(--steptime) ease;
 
   &.none {
-    display: none;
+    opacity: 0;
   }
 
   &.bottom {

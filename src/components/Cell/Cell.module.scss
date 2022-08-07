@@ -1,7 +1,7 @@
 .cell {
   padding: 10px;
-  width: 180px;
-  height: 180px;
+  width: 170px;
+  height: 170px;
   display: flex;
   justify-content: flex-end;
   background-color: var(--pink-light);
@@ -18,26 +18,33 @@
 }
 
 .bear {
-  display: none;
+  opacity: 0;
   width: 50px;
   fill: var(--black);
+  transition: opacity 0.3s ease;
 
   &.active {
-    display: block;
+    opacity: 1;
+  }
+
+  &.wascorrected {
+    opacity: 1;
+    fill: var(--accent);
   }
 }
 
 .like {
-  display: none;
+  opacity: 0;
   width: 50px;
+  transition: opacity 0.3s ease;
 
   &.correct {
-    display: block;
+    opacity: 1;
     fill: var(--accent);
   }
 
   &.incorrect {
-    display: block;
+    opacity: 1;
     fill: var(--red);
     transform: rotate(180deg);
   }

@@ -7,6 +7,8 @@ const initCell = { x: 'A', y: '1' } as ICell;
 const initialState: coreState = {
   isGameInit: false,
   isAbleToClick: false,
+  isUserClickedToCell: false,
+  isWin: null,
   startCell: initCell,
   currentCell: initCell,
   finishCell: initCell,
@@ -36,10 +38,18 @@ export const coreSlice = createSlice({
     },
     setCurrentDirection: (state, action: PayloadAction<Direction>) => {
       state.currentDirection = action.payload;
-      state.currentStep = state.currentStep + 1;
+    },
+    setCurrentStep: (state, action: PayloadAction<number>) => {
+      state.currentStep = action.payload;
     },
     changeAbleToClick: (state) => {
       state.isAbleToClick = !state.isAbleToClick;
+    },
+    changeUserClickedToCellStatus: (state, action: PayloadAction<boolean>) => {
+      state.isUserClickedToCell = action.payload;
+    },
+    setResultStatus: (state, action: PayloadAction<boolean>) => {
+      state.isWin = action.payload;
     },
     finishGame: () => initialState,
   },
@@ -53,7 +63,10 @@ export const {
   setfinishCell,
   setChoosenCell,
   setCurrentDirection,
+  setCurrentStep,
   changeAbleToClick,
+  setResultStatus,
+  changeUserClickedToCellStatus,
 } = coreSlice.actions;
 
 export default coreSlice.reducer;

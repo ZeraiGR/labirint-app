@@ -19,6 +19,8 @@ export enum Direction {
 export interface coreState {
   isGameInit: boolean;
   isAbleToClick: boolean;
+  isUserClickedToCell: boolean;
+  isWin: boolean | null;
   startCell: ICell;
   currentCell: ICell;
   finishCell: ICell;

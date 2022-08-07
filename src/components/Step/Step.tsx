@@ -4,12 +4,16 @@ import { StepProps } from './Step.props';
 import styles from './Step.module.scss';
 import { ReactComponent as ArrowIcon } from './icon-arrow.svg';
 import { Direction } from '../../interfaces/core.interfaces';
+import { useAppSelector } from '../../hooks/hooks';
+import { selectCoreProps } from '../../store/core/coreSelectors';
 
 export const Step = ({ direction, isCurrent, className, ...props }: StepProps): JSX.Element => {
-  console.log();
+  const { isAbleToClick } = useAppSelector(selectCoreProps);
 
   return (
-    <li className={cn(styles.step, className, { [styles.active]: isCurrent })} {...props}>
+    <li
+      className={cn(styles.step, className, { [styles.active]: isCurrent && !isAbleToClick })}
+      {...props}>
       <ArrowIcon
         className={cn(
           styles.arrow,

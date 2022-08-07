@@ -1,3 +1,4 @@
+import React from 'react';
 import cn from 'classnames';
 
 import { CellProps } from './Cell.props';
@@ -5,7 +6,12 @@ import { ICell } from '../../interfaces/core.interfaces';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { selectCoreProps } from '../../store/core/coreSelectors';
-import { changeAbleToClick, setChoosenCell } from '../../store/core/coreSlice';
+import {
+  changeAbleToClick,
+  setChoosenCell,
+  setResultStatus,
+  changeUserClickedToCellStatus,
+} from '../../store/core/coreSlice';
 
 import styles from './Cell.module.scss';
 import { ReactComponent as BearIcon } from './icon-bear.svg';
@@ -17,28 +23,38 @@ export const Cell = ({
   y,
   isStart,
   isChoosen,
-  isCorrected,
   hasChoosen,
-  startGame,
+  finishCell,
+  restart,
   className,
   ...props
 }: CellProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { isAbleToClick } = useAppSelector(selectCoreProps);
+  const { isAbleToClick, isUserClickedToCell } = useAppSelector(selectCoreProps);
   const { timeBetweenRound } = useAppSelector(selectSettingsProps);
+  const isCorrected = finishCell.x === x && finishCell.y === y;
 
   const chooseCell = () => {
     if (!isAbleToClick) {
       return;
     }
-    const currentCell = { x, y } as ICell;
 
+    dispatch(changeUserClickedToCellStatus(true));
+
+    const currentCell = { x, y } as ICell;
     dispatch(setChoosenCell(currentCell));
     dispatch(changeAbleToClick());
 
+    if (isCorrected) {
+      dispatch(setResultStatus(true));
+    } else {
+      dispatch(setResultStatus(false));
+    }
+
     // new party
     setTimeout(() => {
-      startGame();
+      dispatch(changeUserClickedToCellStatus(false));
+      restart();
     }, timeBetweenRound);
   };
 
@@ -56,7 +72,13 @@ export const Cell = ({
             { [styles.hide]: isStart },
           )}
         />
-        <BearIcon className={cn(styles.bear, { [styles.active]: isStart && !hasChoosen })} />
+        <BearIcon
+          className={cn(
+            styles.bear,
+            { [styles.active]: isStart && !hasChoosen },
+            { [styles.wascorrected]: isCorrected && !isChoosen && isUserClickedToCell },
+          )}
+        />
       </div>
     </li>
   );

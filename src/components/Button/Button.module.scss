@@ -16,4 +16,10 @@
   &:active {
     box-shadow: none;
   }
+
+  &:disabled {
+    pointer-events: none;
+    cursor: initial;
+    background-color: #ececec;
+  }
 }

@@ -13,7 +13,7 @@ export interface settingsState {
 
 const initialState: settingsState = {
   timeForStep: 500,
-  timeBetweenRound: 1000,
+  timeBetweenRound: 3000,
   gameName: GAME_NAME,
   gameTitle: GAME_TITLE,
   gameDecription: GAME_DESCRIPTION,

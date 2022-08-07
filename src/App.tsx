@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import {
   initGame,
@@ -7,6 +9,7 @@ import {
   setfinishCell,
   changeAbleToClick,
   setCurrentDirection,
+  setCurrentStep,
 } from './store/core/coreSlice';
 import { selectSettingsProps } from './store/settings/settingsSelectors';
 import { generatestartCell } from './utils/generateStartPosition';
@@ -17,6 +20,12 @@ import { Game } from './pages';
 function App() {
   const dispatch = useAppDispatch();
   const { timeForStep } = useAppSelector(selectSettingsProps);
+
+  // settings game logic
+  React.useEffect(() => {
+    let steptime = timeForStep.toString().replaceAll('0', '');
+    document.documentElement.style.setProperty('--steptime', `0.${steptime}s`);
+  }, []);
 
   // core game logic
   const startGameLoop = (startCell: ICell) => {
@@ -29,18 +38,22 @@ function App() {
       const [updatedPosition, route] = updatePosition(currentCell);
       currentCell = updatedPosition;
       dispatch(setcurrentCell(currentCell));
-
       dispatch(setCurrentDirection(route));
+      dispatch(setCurrentStep(counter));
 
       if (counter === 10) {
         clearInterval(id);
         dispatch(setfinishCell(currentCell));
-        dispatch(changeAbleToClick());
+
+        setTimeout(() => {
+          dispatch(changeAbleToClick());
+          dispatch(setCurrentStep(11));
+        }, timeForStep);
       }
     }, timeForStep);
   };
 
-  const startGame = () => {
+  const start = () => {
     // set start position
     const startCell = generatestartCell();
     dispatch(setstartCell(startCell));
@@ -53,14 +66,19 @@ function App() {
 
   const init = () => {
     dispatch(initGame());
-    startGame();
+    start();
   };
 
   const finish = () => {
     dispatch(finishGame());
   };
 
-  return <Game init={init} startGame={startGame} finish={finish} />;
+  const restart = () => {
+    finish();
+    init();
+  };
+
+  return <Game init={init} restart={restart} finish={finish} />;
 }
 
 export default App;

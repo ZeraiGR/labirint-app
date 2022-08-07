@@ -10,7 +10,7 @@ import { selectCoreProps } from '../../store/core/coreSelectors';
 export const Field = ({
   startCell,
   finishCell,
-  startGame,
+  restart,
   className,
   ...props
 }: FieldProps): JSX.Element => {
@@ -26,8 +26,8 @@ export const Field = ({
           isStart={startCell.x === c.x && startCell.y === c.y}
           isChoosen={choosenCell && choosenCell.x === c.x && choosenCell.y === c.y}
           hasChoosen={choosenCell !== null}
-          isCorrected={finishCell.x === c.x && finishCell.y === c.y}
-          startGame={startGame}
+          finishCell={finishCell}
+          restart={restart}
         />
       ))}
     </ul>
