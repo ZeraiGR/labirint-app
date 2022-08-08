@@ -5,6 +5,18 @@
   background-color: var(--accent-light);
 }
 
+.title {
+  margin-bottom: 30px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
+}
+
 .description {
   font-size: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 }

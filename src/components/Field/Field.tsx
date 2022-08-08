@@ -20,6 +20,7 @@ export const Field = ({
     <ul className={cn(styles.field, className)} {...props}>
       {gameBoard.map((c) => (
         <Cell
+          className={styles.cell}
           key={`${c.x}-${c.y}`}
           x={c.x}
           y={c.y}
