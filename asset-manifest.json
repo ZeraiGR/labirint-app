@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/labirint-app/static/css/main.8eecdff1.css",
-    "main.js": "/labirint-app/static/js/main.a73b694c.js",
-    "static/js/787.28cb0dcd.chunk.js": "/labirint-app/static/js/787.28cb0dcd.chunk.js",
+    "main.js": "/labirint-app/static/js/main.dab37d9f.js",
+    "static/js/787.b680ecc3.chunk.js": "/labirint-app/static/js/787.b680ecc3.chunk.js",
     "static/media/icon-bear.svg": "/labirint-app/static/media/icon-bear.8a9ad6f16e294d9e103c4e1d3b7c7821.svg",
     "static/media/icon-like.svg": "/labirint-app/static/media/icon-like.d150a3809c347d026728b2df47f2c3b2.svg",
     "index.html": "/labirint-app/index.html",
     "static/media/icon-arrow.svg": "/labirint-app/static/media/icon-arrow.0b21696327c494c7ad98cebab6775338.svg",
     "main.8eecdff1.css.map": "/labirint-app/static/css/main.8eecdff1.css.map",
-    "main.a73b694c.js.map": "/labirint-app/static/js/main.a73b694c.js.map",
-    "787.28cb0dcd.chunk.js.map": "/labirint-app/static/js/787.28cb0dcd.chunk.js.map"
+    "main.dab37d9f.js.map": "/labirint-app/static/js/main.dab37d9f.js.map",
+    "787.b680ecc3.chunk.js.map": "/labirint-app/static/js/787.b680ecc3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8eecdff1.css",
-    "static/js/main.a73b694c.js"
+    "static/js/main.dab37d9f.js"
   ]
 }
